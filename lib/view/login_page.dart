@@ -154,12 +154,6 @@ class LoginPage extends StatelessWidget {
                       iconPath: 'assets/icon/Gooogle.jpeg',
                       onPressed: () {},
                     ),
-                    const SizedBox(height: 15),
-                    _buildSocialButton(
-                      label: 'Microsoft',
-                      iconPath: 'assets/icon/microsoft.jpeg',
-                      onPressed: () {},
-                    ),
                   ],
                 ),
 
