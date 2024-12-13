@@ -1,3 +1,4 @@
+import 'package:car_rent/view/dashboard.dart';
 import 'package:car_rent/view/onboarding_screen.dart';
 import 'package:car_rent/view/signup_page.dart';
 // Example for a home page
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const OnBoardingScreen(),
         '/signup': (context) => const SignUpPage(),
+        '/dashboard': (context) => const Dashboard(),
         // '/home': (context) => const HomePage(), // Example additional route
       },
     );

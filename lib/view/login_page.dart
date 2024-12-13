@@ -1,3 +1,4 @@
+import 'package:car_rent/view/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -5,6 +6,14 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Static admin credentials
+    const String adminEmail = 'admin';
+    const String adminPassword = 'admin';
+
+    // Controllers for email and password inputs
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -59,7 +68,10 @@ class LoginPage extends StatelessWidget {
 
                 // Email Input Field
                 _buildTextField(
-                    label: 'Email', hintText: 'Username or Email ID'),
+                  label: 'Email',
+                  hintText: 'Username or Email ID',
+                  controller: emailController,
+                ),
 
                 const SizedBox(height: 20),
 
@@ -68,6 +80,7 @@ class LoginPage extends StatelessWidget {
                   label: 'Password',
                   hintText: 'Enter Password',
                   isPassword: true,
+                  controller: passwordController,
                 ),
 
                 const SizedBox(height: 10),
@@ -92,7 +105,25 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
-                      // Handle sign-in action
+                      // Validate credentials
+                      if (emailController.text == adminEmail &&
+                          passwordController.text == adminPassword) {
+                        // Navigate to Dashboard Screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboard(),
+                          ),
+                        );
+                      } else {
+                        // Show error SnackBar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Invalid email or password!'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
@@ -191,6 +222,7 @@ class LoginPage extends StatelessWidget {
     required String label,
     required String hintText,
     bool isPassword = false,
+    required TextEditingController controller,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -205,6 +237,7 @@ class LoginPage extends StatelessWidget {
         ],
       ),
       child: TextField(
+        controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
           contentPadding:
