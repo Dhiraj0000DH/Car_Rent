@@ -6,170 +6,188 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 100),
-
-            // Logo
-            Center(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-                child: Image.asset(
-                  'assets/images/Logo.png',
-                  height: 150,
-                ),
-              ),
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/car4.jpeg', // Path to your car image
+              fit: BoxFit.cover,
             ),
+          ),
 
-            const SizedBox(height: 40),
-
-            // Title
-            const Center(
-              child: Text(
-                'Welcome Back!',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
+          // Semi-transparent overlay for better readability
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.5), // Adjust opacity as needed
             ),
+          ),
 
-            const SizedBox(height: 30),
+          // Foreground Content (Login UI)
+          SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 100),
 
-            // Email Input Field
-            _buildTextField(label: 'Email', hintText: 'Username or Email ID'),
-
-            const SizedBox(height: 20),
-
-            // Password Input Field
-            _buildTextField(
-              label: 'Password',
-              hintText: 'Enter Password',
-              isPassword: true,
-            ),
-
-            const SizedBox(height: 10),
-
-            // Forget Password
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  // Handle forget password action
-                },
-                child: const Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // Sign In Button
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle sign-in action
-                },
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                  backgroundColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  shadowColor: Colors.blueAccent.withOpacity(0.4),
-                  elevation: 8,
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Sign In',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                // Logo
+                Center(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOut,
+                    child: Image.asset(
+                      'assets/images/Logo.png', // Logo image
+                      height: 150,
                     ),
-                    SizedBox(width: 8),
-                    Icon(
-                      Icons.arrow_forward,
+                  ),
+                ),
+                const SizedBox(height: 40),
+
+                // Title
+                const Center(
+                  child: Text(
+                    'Welcome Back!',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 25),
-
-            // Divider with "Sign in with"
-            const Row(
-              children: [
-                Expanded(child: Divider(color: Colors.grey)),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    'Sign in with',
-                    style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                Expanded(child: Divider(color: Colors.grey)),
-              ],
-            ),
+                const SizedBox(height: 30),
 
-            const SizedBox(height: 20),
+                // Email Input Field
+                _buildTextField(
+                    label: 'Email', hintText: 'Username or Email ID'),
 
-            // Social Login Buttons
-            Column(
-              children: [
-                _buildSocialButton(
-                  label: 'Facebook',
-                  iconPath: 'assets/icon/facebook.jpeg',
-                  onPressed: () {},
+                const SizedBox(height: 20),
+
+                // Password Input Field
+                _buildTextField(
+                  label: 'Password',
+                  hintText: 'Enter Password',
+                  isPassword: true,
                 ),
-                const SizedBox(height: 15),
-                _buildSocialButton(
-                  label: 'Google',
-                  iconPath: 'assets/icon/Gooogle.jpeg',
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 15),
-                _buildSocialButton(
-                  label: 'Microsoft',
-                  iconPath: 'assets/icon/microsoft.jpeg',
-                  onPressed: () {},
-                ),
-              ],
-            ),
 
-            const SizedBox(height: 30),
+                const SizedBox(height: 10),
 
-            // Sign Up Redirect
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Don’t have an account? ',
-                      style: TextStyle(color: Colors.grey)),
-                  TextButton(
+                // Forget Password
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
                     onPressed: () {
-                      // Navigate to sign-up page
+                      // Handle forget password action
                     },
                     child: const Text(
-                      'Sign Up',
+                      'Forgot Password?',
                       style: TextStyle(color: Colors.blue),
                     ),
                   ),
-                ],
-              ),
+                ),
+
+                const SizedBox(height: 30),
+
+                // Sign In Button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle sign-in action
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 14),
+                      backgroundColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      shadowColor: Colors.blueAccent.withOpacity(0.4),
+                      elevation: 8,
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                        SizedBox(width: 8),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                // Divider with "Sign in with"
+                const Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        'Sign in with',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey)),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                // Social Login Buttons
+                Column(
+                  children: [
+                    _buildSocialButton(
+                      label: 'Facebook',
+                      iconPath: 'assets/icon/facebook.jpeg',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 15),
+                    _buildSocialButton(
+                      label: 'Google',
+                      iconPath: 'assets/icon/Gooogle.jpeg',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 15),
+                    _buildSocialButton(
+                      label: 'Microsoft',
+                      iconPath: 'assets/icon/microsoft.jpeg',
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 30),
+
+                // Sign Up Redirect
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Don’t have an account? ',
+                          style: TextStyle(color: Colors.grey)),
+                      TextButton(
+                        onPressed: () {
+                          // Navigate to sign-up page
+                        },
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
