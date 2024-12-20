@@ -65,8 +65,16 @@ flutter:
     - assets/icon/Gooogle.jpeg
     - assets/icon/microsoft.jpeg
     - assets/images/car6.jpg
-    - assets/images/car4.jpeg
     - assets/images/car5.jpeg
+    # - assets/images/Toyata.jpeg
+    - assets/images/ford2.jpeg
+    - assets/images/BMW.jpeg
+    - assets/images/Audi.png
+    - assets/images/mercedes.jpeg
+    - assets/images/nissan.jpeg
+    - assets/images/volkswagen.png
+    
+
   
   
   
@@ -82,12 +90,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Montserrat Bold
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+
+    - family: Montserrat Italic
+      fonts:
+        - asset: assets/fonts/Montserrat-Italic.ttf
+    - family: Montserrat Regular
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf      
+        
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
