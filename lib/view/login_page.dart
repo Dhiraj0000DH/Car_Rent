@@ -6,210 +6,199 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Static admin credentials
     const String adminEmail = 'admin';
     const String adminPassword = 'admin';
 
-    // Controllers for email and password inputs
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      body: Stack(
+      body: Row(
         children: [
-          // Background Image
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/car4.jpeg', // Path to your car image
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // Semi-transparent overlay for better readability
-          Positioned.fill(
+          // Left Side: Image
+          Expanded(
+            flex: 1, // Adjust width of the image area
             child: Container(
-              color: Colors.black.withOpacity(0.5), // Adjust opacity as needed
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      'assets/images/car4.jpeg'), // Path to car image
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           ),
 
-          // Foreground Content (Login UI)
-          SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 100),
-
-                // Logo
-                Center(
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeInOut,
-                    child: Image.asset(
-                      'assets/images/Logo.png', // Logo image
-                      height: 150,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
-
-                // Title
-                const Center(
-                  child: Text(
-                    'Welcome Back!',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
-
-                // Email Input Field
-                _buildTextField(
-                  label: 'Email',
-                  hintText: 'Username or Email ID',
-                  controller: emailController,
-                ),
-
-                const SizedBox(height: 20),
-
-                // Password Input Field
-                _buildTextField(
-                  label: 'Password',
-                  hintText: 'Enter Password',
-                  isPassword: true,
-                  controller: passwordController,
-                ),
-
-                const SizedBox(height: 10),
-
-                // Forget Password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      // Handle forget password action
-                    },
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 30),
-
-                // Sign In Button
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Validate credentials
-                      if (emailController.text == adminEmail &&
-                          passwordController.text == adminPassword) {
-                        // Navigate to Dashboard Screen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Dashboard(),
-                          ),
-                        );
-                      } else {
-                        // Show error SnackBar
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Invalid email or password!'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 14),
-                      backgroundColor: Colors.blueAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      shadowColor: Colors.blueAccent.withOpacity(0.4),
-                      elevation: 8,
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                        SizedBox(width: 8),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 25),
-
-                // Divider with "Sign in with"
-                const Row(
+          // Right Side: Login Content
+          Expanded(
+            flex: 2, // Adjust width of the login area
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: Divider(color: Colors.grey)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    const SizedBox(height: 100),
+
+                    // Logo
+                    Center(
+                      child: Image.asset(
+                        'assets/images/Logo.png', // Logo image
+                        height: 150,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+
+                    // Title
+                    const Center(
                       child: Text(
-                        'Sign in with',
-                        style: TextStyle(color: Colors.grey),
+                        'Welcome Back!',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                    Expanded(child: Divider(color: Colors.grey)),
-                  ],
-                ),
+                    const SizedBox(height: 30),
 
-                const SizedBox(height: 20),
-
-                // Social Login Buttons
-                Column(
-                  children: [
-                    _buildSocialButton(
-                      label: 'Facebook',
-                      iconPath: 'assets/icon/facebook.jpeg',
-                      onPressed: () {},
+                    // Email Input Field
+                    _buildTextField(
+                      label: 'Email',
+                      hintText: 'Username or Email ID',
+                      controller: emailController,
                     ),
-                    const SizedBox(height: 15),
-                    _buildSocialButton(
-                      label: 'Google',
-                      iconPath: 'assets/icon/Gooogle.jpeg',
-                      onPressed: () {},
+                    const SizedBox(height: 20),
+
+                    // Password Input Field
+                    _buildTextField(
+                      label: 'Password',
+                      hintText: 'Enter Password',
+                      isPassword: true,
+                      controller: passwordController,
                     ),
-                  ],
-                ),
 
-                const SizedBox(height: 30),
+                    const SizedBox(height: 10),
 
-                // Sign Up Redirect
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Don’t have an account? ',
-                          style: TextStyle(color: Colors.grey)),
-                      TextButton(
-                        onPressed: () {
-                          // Navigate to sign-up page
-                        },
+                    // Forget Password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {},
                         child: const Text(
-                          'Sign Up',
+                          'Forgot Password?',
                           style: TextStyle(color: Colors.blue),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 30),
+
+                    // Sign In Button
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (emailController.text == adminEmail &&
+                              passwordController.text == adminPassword) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboard(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Invalid email or password!'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 32, vertical: 14),
+                          backgroundColor: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          elevation: 8,
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Sign In',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                            SizedBox(width: 8),
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Divider
+                    const Row(
+                      children: [
+                        Expanded(child: Divider(color: Colors.grey)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            'Sign in with',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        Expanded(child: Divider(color: Colors.grey)),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Social Buttons
+                    Column(
+                      children: [
+                        _buildSocialButton(
+                          label: 'Facebook',
+                          iconPath: 'assets/icon/facebook.jpeg',
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 15),
+                        _buildSocialButton(
+                          label: 'Google',
+                          iconPath: 'assets/icon/Gooogle.jpeg',
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Sign Up Redirect
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Don’t have an account? ',
+                              style: TextStyle(color: Colors.grey)),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -217,7 +206,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // Reusable TextField Widget
+  // Reusable Widgets
   Widget _buildTextField({
     required String label,
     required String hintText,
@@ -249,14 +238,11 @@ class LoginPage extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.white,
-          hintStyle: const TextStyle(color: Colors.grey),
-          labelStyle: const TextStyle(color: Colors.black),
         ),
       ),
     );
   }
 
-  // Reusable Social Button Widget
   Widget _buildSocialButton({
     required String label,
     required String iconPath,

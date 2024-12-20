@@ -27,14 +27,13 @@ class SplashScreen extends StatelessWidget {
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment:
-                  CrossAxisAlignment.center, // Ensure centering horizontally
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // App Logo (use your logo widget here)
                 Image.asset(
-                  'assets/images/Logo.png', // Logo image path
-                  width: 350, // You can adjust this width
-                  height: 250, // You can adjust this height
+                  'assets/images/Logo.png',
+                  width: 250,
+                  height: 150,
                 ),
 
                 // const SizedBox(height: 20), // Space between logo and tagline
@@ -49,7 +48,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 10), // Space between tagline and button
+                const SizedBox(height: 10),
 
                 // Tagline
                 const Text(
@@ -60,7 +59,7 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 50), // Space between tagline and button
+                const SizedBox(height: 50),
 
                 // Navigate to Onboarding Screen Button
                 ElevatedButton(
