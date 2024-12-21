@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int? _selectedItemIndex; // To track the selected car index
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +34,31 @@ class HomeView extends StatelessWidget {
           // Brand Logos
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _buildCarLogo('assets/images/nissan.jpeg', 'Nissan'),
-                  _buildCarLogo('assets/images/BMW.jpeg', 'BMW'),
-                  _buildCarLogo('assets/images/volkswagen.png', 'Volkswagen'),
-                  _buildCarLogo('assets/images/mercedes.jpeg', 'Mercedes'),
-                ],
+            child: SizedBox(
+              height: 120, // Fixed height for logos
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5, // Number of logos
+                itemBuilder: (context, index) {
+                  // Updated logo order
+                  final logos = [
+                    {'path': 'assets/images/BMW.jpeg', 'name': 'BMW'},
+                    {
+                      'path': 'assets/images/volkswagen.png',
+                      'name': 'Volkswagen'
+                    },
+                    {'path': 'assets/images/mercedes.jpeg', 'name': 'Mercedes'},
+                    {
+                      'path': 'assets/images/nissan.jpeg',
+                      'name': 'Nissan'
+                    }, // Nissan at 4th position
+                    {'path': 'assets/images/Audi.png', 'name': 'Audi'},
+                  ];
+                  return _buildCarLogo(
+                    logos[index]['path']!,
+                    logos[index]['name']!,
+                  );
+                },
               ),
             ),
           ),
@@ -51,16 +73,54 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               itemCount: 6, // Example item count
               itemBuilder: (context, index) {
-                // Define image paths for items
-                final itemImages = [
-                  'assets/images/car6.jpg',
-                  'assets/images/car6.jpg',
-                  'assets/images/car6.jpg',
-                  'assets/images/car6.jpg',
-                  'assets/images/car6.jpg',
-                  'assets/images/car6.jpg',
+                // Define image paths, names, and prices for items
+                final items = [
+                  {
+                    'imagePath': 'assets/images/car6.jpg',
+                    'name': 'Nissan Altima',
+                    'price': 'Rs. 2,000'
+                  },
+                  {
+                    'imagePath': 'assets/images/car7.jpeg',
+                    'name': 'BMW X5',
+                    'price': 'Rs. 2,500'
+                  },
+                  {
+                    'imagePath': 'assets/images/car6.jpg',
+                    'name': 'Volkswagen Passat',
+                    'price': 'Rs. 3,000'
+                  },
+                  {
+                    'imagePath': 'assets/images/car6.jpg',
+                    'name': 'Mercedes-Benz C-Class',
+                    'price': 'Rs. 1,800'
+                  },
+                  {
+                    'imagePath': 'assets/images/car6.jpg',
+                    'name': 'Toyota Camry',
+                    'price': 'Rs. 2,200'
+                  },
+                  {
+                    'imagePath': 'assets/images/car6.jpg',
+                    'name': 'Honda Accord',
+                    'price': 'Rs. 1,900'
+                  },
                 ];
-                return _buildItemCard(itemImages[index], 'Item ${index + 1}');
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedItemIndex =
+                          (_selectedItemIndex == index) ? null : index;
+                    });
+                  },
+                  child: _buildItemCard(
+                    items[index]['imagePath']!,
+                    items[index]['name']!,
+                    _selectedItemIndex == index
+                        ? '${items[index]['price']} per day'
+                        : null, // Show price only if tapped
+                  ),
+                );
               },
             ),
           ),
@@ -71,7 +131,8 @@ class HomeView extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart), label: 'Cart'),
-          BottomNavigationBarItem(icon: Icon(Icons.info), label: 'About Us'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today), label: 'Booking'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: 0,
@@ -86,6 +147,7 @@ class HomeView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             width: 80,
@@ -108,7 +170,7 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _buildItemCard(String imagePath, String itemName) {
+  Widget _buildItemCard(String imagePath, String carName, String? price) {
     return Card(
       elevation: 4,
       child: Column(
@@ -126,9 +188,20 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            itemName,
+            carName,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
+          if (price != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              price,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ],
       ),
     );

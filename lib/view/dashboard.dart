@@ -1,4 +1,4 @@
-import 'package:car_rent/view/dashboard_view/about_us_view.dart';
+import 'package:car_rent/view/dashboard_view/booking_view.dart';
 import 'package:car_rent/view/dashboard_view/cart_view.dart';
 import 'package:car_rent/view/dashboard_view/home_view.dart';
 import 'package:car_rent/view/dashboard_view/profile_view.dart';
@@ -14,10 +14,11 @@ class Dashboard extends StatefulWidget {
 class _DashboardScreenState extends State<Dashboard> {
   int _currentIndex = 0;
 
+  // Replace AboutUsView with BookingView in the list of pages
   final List<Widget> _pages = [
     const HomeView(),
     const CartView(),
-    const AboutUsView(),
+    const BookingView(), // Replaced AboutUsView with BookingView
     const ProfileView(),
   ];
 
@@ -55,8 +56,8 @@ class _DashboardScreenState extends State<Dashboard> {
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About Us',
+            icon: Icon(Icons.calendar_today), // Updated icon for Booking
+            label: 'Booking', // Updated label to "Booking"
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
