@@ -11,236 +11,240 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool _isPasswordVisible = false; // For toggling password visibility
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     const String adminEmail = 'admin';
     const String adminPassword = 'admin';
 
-    final size = MediaQuery.of(context).size; // Screen size for responsiveness
-
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background Image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/car4.jpeg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue.shade100, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          // Form Fields with a Semi-Transparent Background
-          Center(
-            child: SingleChildScrollView(
-              child: Container(
-                width: size.width * 0.85, // Adjust form width
-                padding: const EdgeInsets.all(24.0),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.85),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 15,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Title
-                    const Center(
-                      child: Text(
-                        'Welcome Back!',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w300, // Extra Light
-                          fontSize: 28,
-                          color: Colors.black,
-                        ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.85,
+              padding: const EdgeInsets.all(24.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 15,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Title
+                  const Center(
+                    child: Text(
+                      'Welcome Back!',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: size.height * 0.03),
+                  ),
+                  const SizedBox(height: 10),
 
-                    // Email Input Field
-                    _buildTextField(
-                      label: 'Email',
-                      hintText: 'Enter your email',
-                      controller: emailController,
-                    ),
-                    SizedBox(height: size.height * 0.02),
-
-                    // Password Input Field
-                    _buildPasswordField(
-                      label: 'Password',
-                      hintText: 'Enter your password',
-                      controller: passwordController,
-                    ),
-
-                    SizedBox(height: size.height * 0.01),
-
-                    // Forgot Password
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w300,
-                            color: Colors.blue,
-                          ),
-                        ),
+                  // Subtitle
+                  const Center(
+                    child: Text(
+                      'Log in to your account',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16,
+                        color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: size.height * 0.03),
+                  ),
+                  const SizedBox(height: 30),
 
-                    // Sign In Button
-                    ElevatedButton(
-                      onPressed: () {
-                        if (emailController.text.isEmpty ||
-                            passwordController.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Email and Password cannot be empty!',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              backgroundColor: Colors.orange,
-                            ),
-                          );
-                          return;
-                        }
+                  // Email Input Field
+                  _buildTextField(
+                    label: 'Email',
+                    hintText: 'Enter your email',
+                    controller: emailController,
+                  ),
+                  const SizedBox(height: 20),
 
-                        if (emailController.text == adminEmail &&
-                            passwordController.text == adminPassword) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Dashboard(),
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Invalid email or password!',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        elevation: 5,
-                      ),
+                  // Password Input Field
+                  _buildPasswordField(
+                    label: 'Password',
+                    hintText: 'Enter your password',
+                    controller: passwordController,
+                  ),
+                  const SizedBox(height: 10),
+
+                  // Forgot Password
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
                       child: const Text(
-                        'Sign In',
+                        'Forgot Password?',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w300,
-                          color: Colors.white,
-                          fontSize: 18,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 20),
 
-                    SizedBox(height: size.height * 0.03),
-
-                    // Divider
-                    const Row(
-                      children: [
-                        Expanded(
-                          child: Divider(color: Colors.grey),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            'Or Sign in with',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w300,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Divider(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: size.height * 0.02),
-
-                    // Social Buttons
-                    Column(
-                      children: [
-                        _buildSocialButton(
-                          label: 'Facebook',
-                          iconPath: 'assets/icon/facebook.jpeg',
-                          onPressed: () {},
-                        ),
-                        const SizedBox(height: 15),
-                        _buildSocialButton(
-                          label: 'Google',
-                          iconPath: 'assets/icon/Gooogle.jpeg',
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: size.height * 0.03),
-
-                    // Sign Up Redirect
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Don’t have an account? ',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w300,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Sign Up',
+                  // Sign In Button
+                  ElevatedButton(
+                    onPressed: () {
+                      if (emailController.text.isEmpty ||
+                          passwordController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Email and Password cannot be empty!',
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w300,
-                                color: Colors.blue,
                               ),
                             ),
+                            backgroundColor: Colors.orange,
                           ),
-                        ],
+                        );
+                        return;
+                      }
+
+                      if (emailController.text == adminEmail &&
+                          passwordController.text == adminPassword) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboard(),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Invalid email or password!',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      elevation: 5,
+                    ),
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                        fontSize: 18,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Divider
+                  const Row(
+                    children: [
+                      Expanded(
+                        child: Divider(color: Colors.grey),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          'Or Sign in with',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w300,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Social Buttons
+                  Column(
+                    children: [
+                      _buildSocialButton(
+                        label: 'Facebook',
+                        iconPath: 'assets/icon/facebook.jpeg',
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 15),
+                      _buildSocialButton(
+                        label: 'Google',
+                        iconPath: 'assets/images/logo of google.png',
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Sign Up Redirect
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Don’t have an account? ',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w300,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w400,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -261,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
           fontWeight: FontWeight.w300,
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.grey.shade100,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
@@ -297,7 +301,7 @@ class _LoginPageState extends State<LoginPage> {
           },
         ),
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.grey.shade100,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
