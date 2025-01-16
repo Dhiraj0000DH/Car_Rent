@@ -8,179 +8,178 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background Image with Full-Screen Coverage
-          SizedBox.expand(
-            child: Image.asset(
-              'assets/images/car4.jpeg', // Replace with your car background image
-              fit: BoxFit.cover,
-            ),
-          ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 50),
 
-          // Semi-transparent overlay for better readability
-          Container(
-            color: Colors.black.withOpacity(0.5), // Adjust opacity as needed
-          ),
-
-          // Foreground Content (Sign-Up UI)
-          SafeArea(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
+                // Title
+                const Center(
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 10),
+
+                // Subtitle
+                const Center(
+                  child: Text(
+                    'Create your account to get started!',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Montserrat',
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+
+                // Full Name Input Field
+                _buildTextField(
+                  label: 'Full Name',
+                  hintText: 'Enter your full name',
+                ),
+                const SizedBox(height: 20),
+
+                // Email Input Field
+                _buildTextField(
+                  label: 'Email',
+                  hintText: 'Enter your email',
+                ),
+                const SizedBox(height: 20),
+
+                // Password Input Field
+                _buildTextField(
+                  label: 'Password',
+                  hintText: 'Enter your password',
+                  isPassword: true,
+                ),
+                const SizedBox(height: 20),
+
+                // Confirm Password Input Field
+                _buildTextField(
+                  label: 'Confirm Password',
+                  hintText: 'Re-enter your password',
+                  isPassword: true,
+                ),
+                const SizedBox(height: 30),
+
+                // Sign Up Button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle sign-up action
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 14,
+                      ),
+                      backgroundColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      elevation: 5,
+                    ),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+
+                // Divider with "OR"
+                const Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.grey)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        'OR',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey)),
+                  ],
+                ),
+                const SizedBox(height: 20),
+
+                // Social Sign Up Buttons
+                Column(
+                  children: [
+                    _buildSocialButton(
+                      label: 'Sign Up with Facebook',
+                      iconPath: 'assets/icon/facebook.jpeg',
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 15),
+                    _buildSocialButton(
+                      label: 'Sign Up with Google',
+                      iconPath: 'assets/images/logo of google.png',
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+
+                // Login Redirect
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 60),
-
-                      // Title
-                      const Center(
-                        child: Text(
-                          'Create a New Account',
+                      const Text(
+                        'Already have an account? ',
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Navigate to login page
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Login',
                           style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Montserrat',
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-
-                      // Full Name Input Field
-                      _buildTextField(
-                        label: 'Full Name',
-                        hintText: 'Enter your full name',
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Email Input Field
-                      _buildTextField(
-                        label: 'Email',
-                        hintText: 'Enter your email',
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Password Input Field
-                      _buildTextField(
-                        label: 'Password',
-                        hintText: 'Enter your password',
-                        isPassword: true,
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Confirm Password Input Field
-                      _buildTextField(
-                        label: 'Confirm Password',
-                        hintText: 'Re-enter your password',
-                        isPassword: true,
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Sign Up Button
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Handle sign-up action
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 16,
-                            ),
-                            backgroundColor: Colors.blueAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            shadowColor: Colors.blueAccent.withOpacity(0.5),
-                            elevation: 10,
-                          ),
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 25),
-
-                      // Divider with "Sign up with"
-                      const Row(
-                        children: [
-                          Expanded(child: Divider(color: Colors.white54)),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              'Or Sign up with',
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                          ),
-                          Expanded(child: Divider(color: Colors.white54)),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Social Sign Up Buttons
-                      Column(
-                        children: [
-                          _buildSocialButton(
-                            label: 'Sign Up with Facebook',
-                            iconPath: 'assets/icon/facebook.jpeg',
-                            onPressed: () {},
-                          ),
-                          const SizedBox(height: 15),
-                          _buildSocialButton(
-                            label: 'Sign Up with Google',
-                            iconPath: 'assets/icon/Gooogle.jpeg',
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-
-                      // Login Redirect
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Already have an account? ',
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                // Navigate to login page
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginPage(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(
-                                  color: Colors.blueAccent,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -191,31 +190,25 @@ class SignUpPage extends StatelessWidget {
     required String hintText,
     bool isPassword = false,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 6,
-          ),
-        ],
-      ),
-      child: TextField(
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-          labelText: label,
-          hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          filled: true,
-          fillColor: Colors.white,
-          hintStyle: const TextStyle(color: Colors.grey),
-          labelStyle: const TextStyle(color: Colors.black),
+    return TextField(
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        filled: true,
+        fillColor: Colors.grey[100],
+        labelStyle: const TextStyle(
+          color: Colors.black87,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w300,
+        ),
+        hintStyle: const TextStyle(
+          color: Colors.grey,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w300,
         ),
       ),
     );
@@ -247,7 +240,11 @@ class SignUpPage extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               label,
-              style: const TextStyle(color: Colors.black),
+              style: const TextStyle(
+                color: Colors.black,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w300,
+              ),
             ),
           ],
         ),

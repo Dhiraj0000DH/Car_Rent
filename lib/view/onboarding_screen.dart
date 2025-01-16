@@ -18,7 +18,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           OnBoardScreen(
-            imagePath: 'assets/images/car4.jpeg',
+            imagePath: 'assets/images/Audi1.jpeg',
             title: 'Welcome to Our Car Rental Service!',
             description:
                 'Experience unmatched convenience with our seamless booking process and reliable cars for every journey.',
@@ -104,8 +104,8 @@ class OnBoardScreen extends StatelessWidget {
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        fontFamily: 'Montserrat',
                         letterSpacing: 1.2,
-                        fontFamily: 'Roboto',
                         shadows: [
                           Shadow(
                             offset: Offset(2, 2),
@@ -123,8 +123,8 @@ class OnBoardScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w300, // Light font weight
                         height: 1.5,
                       ),
                     ),
@@ -160,6 +160,7 @@ class OnBoardScreen extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
                     ),
